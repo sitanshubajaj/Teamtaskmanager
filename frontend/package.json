@@ -11,7 +11,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "serve -s dist"
+    "start": "serve -s dist -l $PORT"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
