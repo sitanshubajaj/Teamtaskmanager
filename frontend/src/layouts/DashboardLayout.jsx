@@ -1,8 +1,9 @@
-import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLogoutMutation } from '../features/auth/authApiSlice';
 import { logOut, selectCurrentUser } from '../features/auth/authSlice';
 import { LogOut, LayoutDashboard, FolderKanban, CheckSquare } from 'lucide-react';
+import { motion } from 'framer-motion';
 import './DashboardLayout.css';
 
 const DashboardLayout = () => {
@@ -21,38 +22,65 @@ const DashboardLayout = () => {
     }
   };
 
+  const sidebarVariants = {
+    hidden: { x: -280, opacity: 0 },
+    visible: { 
+      x: 0, 
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 100, damping: 20 }
+    }
+  };
+
   return (
     <div className="layout-container">
-      <aside className="sidebar">
+      <motion.aside 
+        className="sidebar"
+        variants={sidebarVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <div className="sidebar-header">
-          <h2>TeamTask</h2>
+          <h2 className="text-gradient">TeamTask</h2>
         </div>
         <nav className="sidebar-nav">
-          <Link to="/" className="nav-item">
+          <NavLink to="/" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
             <LayoutDashboard size={20} />
             <span>Dashboard</span>
-          </Link>
-          <Link to="/projects" className="nav-item">
+          </NavLink>
+          <NavLink to="/projects" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
             <FolderKanban size={20} />
             <span>Projects</span>
-          </Link>
-          <Link to="/tasks" className="nav-item">
+          </NavLink>
+          <NavLink to="/tasks" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>
             <CheckSquare size={20} />
             <span>My Tasks</span>
-          </Link>
+          </NavLink>
         </nav>
         <div className="sidebar-footer">
           <div className="user-info">
-            <span className="user-name">{user?.username}</span>
-            <span className="user-role">{user?.role}</span>
+            <span className="user-name">{user?.username || 'User'}</span>
+            <span className="user-role">{user?.role || 'Member'}</span>
           </div>
-          <button onClick={handleLogout} className="logout-btn" aria-label="Log out">
+          <motion.button 
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={handleLogout} 
+            className="logout-btn" 
+            aria-label="Log out"
+          >
             <LogOut size={20} />
-          </button>
+          </motion.button>
         </div>
-      </aside>
+      </motion.aside>
       <main className="main-content">
-        <Outlet />
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          style={{ height: '100%' }}
+        >
+          <Outlet />
+        </motion.div>
       </main>
     </div>
   );

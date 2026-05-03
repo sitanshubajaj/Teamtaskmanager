@@ -66,8 +66,6 @@ const Tasks = () => {
     try {
       const payload = { ...formData };
       if (projectId) payload.project = projectId;
-      // If we are on "My Tasks" view (no projectId), creating a task needs a project selected.
-      // But we'll assume Admin only creates from inside a project view for simplicity.
       
       await createTask(payload).unwrap();
       toast.success('Task created successfully!');
@@ -96,7 +94,7 @@ const Tasks = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="projects-header">
+      <div className="projects-header clean-card">
         <div>
           <h1>Tasks</h1>
           <p style={{ color: 'var(--text-muted)' }}>Drag and drop to update status</p>
@@ -125,7 +123,7 @@ const Tasks = () => {
                       className="task-list"
                       ref={provided.innerRef}
                       {...provided.droppableProps}
-                      style={{ backgroundColor: snapshot.isDraggingOver ? 'var(--background)' : 'transparent' }}
+                      style={{ backgroundColor: snapshot.isDraggingOver ? 'var(--bg-color)' : 'transparent' }}
                     >
                       {columnTasks.map((task, index) => (
                         <Draggable key={task._id} draggableId={task._id} index={index}>
@@ -135,7 +133,13 @@ const Tasks = () => {
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                               className="task-card"
-                              style={{ ...provided.draggableProps.style, opacity: snapshot.isDragging ? 0.8 : 1 }}
+                              style={{ 
+                                ...provided.draggableProps.style, 
+                                opacity: snapshot.isDragging ? 0.8 : 1,
+                                border: snapshot.isDragging ? '1px solid var(--primary)' : '1px solid var(--border)',
+                                transform: snapshot.isDragging ? 'scale(1.05)' : 'scale(1)',
+                                boxShadow: snapshot.isDragging ? 'var(--shadow-lg)' : 'var(--shadow-sm)'
+                              }}
                             >
                               <h4>{task.title}</h4>
                               <p>{task.description}</p>
@@ -168,7 +172,7 @@ const Tasks = () => {
             exit={{ opacity: 0 }}
           >
             <motion.div 
-              className="modal-content" 
+              className="modal-content clean-card" 
               onClick={e => e.stopPropagation()}
               variants={modalVariants}
               initial="hidden"
@@ -187,7 +191,7 @@ const Tasks = () => {
                   value={formData.description} 
                   onChange={e => setFormData({...formData, description: e.target.value})} 
                   rows="2"
-                  style={{ padding: '0.75rem', borderRadius: '0.375rem', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--text-main)', resize: 'vertical' }}
+                  style={{ resize: 'vertical' }}
                 />
               </div>
               <div className="form-group">

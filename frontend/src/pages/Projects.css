@@ -2,32 +2,42 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+}
+
+.projects-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+  color: var(--text-main);
 }
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
 }
 
 .project-card {
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem;
 }
 
 .project-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 .project-title {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
   color: var(--primary);
@@ -35,8 +45,8 @@
 
 .project-desc {
   color: var(--text-muted);
-  font-size: 0.875rem;
-  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
   flex: 1;
 }
 
@@ -46,35 +56,34 @@
   align-items: center;
   border-top: 1px solid var(--border);
   padding-top: 1rem;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
 }
 
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 50;
+  z-index: 100;
 }
 
 .modal-content {
-  background-color: var(--surface);
-  padding: 2rem;
-  border-radius: 0.5rem;
+  padding: 2.5rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 550px;
   max-height: 90vh;
   overflow-y: auto;
 }
 
 .modal-content h2 {
   margin-bottom: 1.5rem;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
 }
 
 .modal-actions {
@@ -82,14 +91,4 @@
   justify-content: flex-end;
   gap: 1rem;
   margin-top: 2rem;
-}
-
-.btn-secondary {
-  background-color: var(--border);
-  color: var(--text-main);
-}
-
-.btn-secondary:hover {
-  background-color: var(--text-muted);
-  color: white;
 }

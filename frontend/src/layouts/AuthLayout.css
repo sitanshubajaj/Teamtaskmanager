@@ -3,32 +3,58 @@
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  background-color: var(--background);
+  position: relative;
+  overflow: hidden;
+  padding: 1rem;
+  background-color: var(--bg-color);
+}
+
+/* Soft aesthetic shapes */
+.soft-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.shape-1 {
+  width: 500px;
+  height: 500px;
+  background: rgba(79, 70, 229, 0.1);
+  top: -150px;
+  left: -100px;
+}
+
+.shape-2 {
+  width: 400px;
+  height: 400px;
+  background: rgba(14, 165, 233, 0.08);
+  bottom: -100px;
+  right: -50px;
 }
 
 .auth-container {
   width: 100%;
-  max-width: 400px;
-  padding: 2.5rem;
-  background-color: var(--surface);
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  border: 1px solid var(--border);
+  max-width: 420px;
+  padding: 3rem 2.5rem;
+  position: relative;
+  z-index: 1;
+  /* Clean card styles applied via global .clean-card class */
 }
 
 .auth-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .auth-header h2 {
-  font-size: 1.875rem;
-  font-weight: 700;
-  color: var(--primary);
+  font-size: 2rem;
   margin-bottom: 0.5rem;
+  /* gradient applied via .text-gradient */
 }
 
 .auth-header p {
   color: var(--text-muted);
-  font-size: 0.875rem;
+  font-size: 0.95rem;
 }
