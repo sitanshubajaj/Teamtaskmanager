@@ -18,7 +18,7 @@ Team Task Manager is an enterprise-grade, highly scalable full-stack web applica
 | Role | Email | Password |
 |------|-------|----------|
 | Admin | admin@demo.com | Password123 |
-| Member| member@demo.com| Password123 |
+| Member| bob@demo.com| Password123 |
 
 ---
 
